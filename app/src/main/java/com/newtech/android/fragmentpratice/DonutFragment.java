@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class DonutFragment extends Fragment {
 
     ImageView imageDonut;
     TextView txtNameDonut, txtDescDonut, txtPrice, txtRestaurantInfo;
+    ImageButton btnDecre,btnIncre;
 
     public DonutFragment() {
         // Required empty public constructor
@@ -56,8 +58,12 @@ public class DonutFragment extends Fragment {
         txtDescDonut = view.findViewById(R.id.txtDescDonut);
         txtPrice = view.findViewById(R.id.txtPrice);
         txtRestaurantInfo = view.findViewById(R.id.txtRestaurantInfo);
-
         DonutDTO donut = DonutLab.getInstance(getActivity()).getDonut(donutId);
+        showDonutInfo(view, donut);
+        return view;
+    }
+
+    private void showDonutInfo(View view, DonutDTO donut) {
         if(donut!=null){
             imageDonut.setImageResource(donut.getImage());
             txtNameDonut.setText(donut.getName());
@@ -65,6 +71,5 @@ public class DonutFragment extends Fragment {
             txtPrice.setText(view.getResources().getString(R.string.price_donut,donut.getPrice()+""));
             txtRestaurantInfo.setText(donut.getRestaurantInfo());
         }
-        return view;
     }
 }
