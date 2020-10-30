@@ -1,6 +1,7 @@
 package com.newtech.android.fragmentpratice.model;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.newtech.android.fragmentpratice.R;
@@ -51,6 +52,16 @@ public class DonutLab {
             }
         }
         return null;
+    }
+
+    public List<DonutDTO> getDonutByNameContaining(final String keyword){
+        List<DonutDTO> donutsSearched = new ArrayList<>();
+        for (DonutDTO item : mDonutDTOS) {
+            if(item.getName().trim().toLowerCase().contains(keyword)){
+                donutsSearched.add(item);
+            }
+        }
+        return donutsSearched;
     }
 
 }

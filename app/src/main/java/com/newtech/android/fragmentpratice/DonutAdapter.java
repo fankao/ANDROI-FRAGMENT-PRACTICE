@@ -51,6 +51,11 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.DonutViewHol
         return mDonutDTOS.size();
     }
 
+    public void setDonutDTOS(List<DonutDTO> donutDTOS) {
+        mDonutDTOS = donutDTOS;
+        notifyDataSetChanged();
+    }
+
     public class DonutViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imageDonut;
         TextView txtNameDonut,txtDescDonut,txtPrice;
