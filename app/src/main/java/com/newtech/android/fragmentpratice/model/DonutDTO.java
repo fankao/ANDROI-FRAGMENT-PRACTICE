@@ -1,6 +1,8 @@
 package com.newtech.android.fragmentpratice.model;
 
-public class DonutDTO {
+import java.io.Serializable;
+
+public class DonutDTO implements Serializable {
     private int id;
     private String name;
     private String shortDesc;

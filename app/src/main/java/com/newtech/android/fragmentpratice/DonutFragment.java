@@ -1,5 +1,6 @@
 package com.newtech.android.fragmentpratice;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,9 +8,12 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.newtech.android.fragmentpratice.model.CartItem;
+import com.newtech.android.fragmentpratice.model.CartLab;
 import com.newtech.android.fragmentpratice.model.DonutDTO;
 import com.newtech.android.fragmentpratice.model.DonutLab;
 
@@ -26,6 +30,8 @@ public class DonutFragment extends Fragment {
 
     ImageView imageDonut;
     TextView txtNameDonut, txtDescDonut, txtPrice, txtRestaurantInfo;
+    Button btnAddToCart;
+
 
     public DonutFragment() {
         // Required empty public constructor
@@ -57,7 +63,7 @@ public class DonutFragment extends Fragment {
         txtPrice = view.findViewById(R.id.txtPrice);
         txtRestaurantInfo = view.findViewById(R.id.txtRestaurantInfo);
 
-        DonutDTO donut = DonutLab.getInstance(getActivity()).getDonut(donutId);
+        final DonutDTO donut = DonutLab.getInstance(getActivity()).getDonut(donutId);
         if(donut!=null){
             imageDonut.setImageResource(donut.getImage());
             txtNameDonut.setText(donut.getName());
@@ -65,6 +71,16 @@ public class DonutFragment extends Fragment {
             txtPrice.setText(view.getResources().getString(R.string.price_donut,donut.getPrice()+""));
             txtRestaurantInfo.setText(donut.getRestaurantInfo());
         }
+
+        btnAddToCart = view.findViewById(R.id.btnAddToCart);
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartLab.getInstance(getActivity()).addItem(new CartItem(donut,1));
+                Intent intent = new Intent(getActivity().getApplicationContext(),CartActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }
